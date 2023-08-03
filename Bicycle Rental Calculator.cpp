@@ -4,86 +4,86 @@
 // 222010802 NYODUSENGA Florence
 
 
-
 #include<iostream>
 using namespace std;
-
-string identifyMushroom();
-
-void askQuestion(string question, int& answer)
+int calculateRental(int, int, int);
+int main()
 {
-	cout<< question <<" (1 or 0): ";
-	cin>>answer;
-}
-
-string identifyMushroom()
-{
-	int answer;
-	string mushroom;
-	
-	//ask about gills and pores
-	askQuestion("Does your mushroom have gills?", answer);
-	if(answer == 1)
+	int startTime, endTime;
+	cout<<"Enter the starting time: ";
+	cin>>startTime;
+	cout<<"Enter the ending time: ";
+	cin>>endTime;
+	if(startTime >= 0 && startTime <= 23 && endTime >= 1 && endTime <= 24 && endTime > startTime)
 	{
-		//ask about forest and meadow
-		askQuestion("Does your mushroom grow in forest?", answer);
-		if(answer == 1)
-		{
-			//ask about convex cap
-			askQuestion("Does your mushroom have a convex cap?", answer);
-			if(answer == 1)
-			{
-				//ask about ring
-				askQuestion("Does your mushroom have a ring?", answer);
-				if(answer == 1)
-				{
-					mushroom = "Amanite tuemouche";
-				}
-				else
-				{
-					mushroom = "Pied bleu";
-				}
-			}
-			else
-			{
-				mushroom = "Girolle";
-			}
-		}
-		else
-		{
-			//ask about convex cap
-			askQuestion("Does your mushroom have a Convex cap?", answer);
-			if(answer == 1)
-			{
-				mushroom = "Agaric Jaunissant";
-			}
-			else
-			{
-				mushroom = "Coprin chevelu";
-			}
-		}
+		cout<<"The Total Rental fees = "<<calculateRental(startTime, endTime, 0)<<endl;
 	}
 	else
 	{
-		mushroom = "Cepe de bordeau";
+		cout<<"\n\nFollow all conditions.\n\n1. Start Time must be between 0-23\n2. End Time must be between 1-24\n3. End Time must be greater than Start Time.\n\n";
+	}
+	return 0;
+}
+
+int calculateRental(int startTime, int endTime, int currentCost)
+{
+	
+	if(startTime < 7)
+	{
+		if(endTime <= 7)
+		{
+			currentCost += (endTime - startTime) * 500;
+			return currentCost;
+		}
+		currentCost += (7 - startTime) * 500;
+		startTime = 7;
+		return calculateRental(startTime, endTime, currentCost);
 	}
 	
-	return mushroom;
-}
-
-int main()
-{
-	cout<<"\n\nThink a mushroom and answer the following questions (1 for yes and 0 for no) to get the name of mushroom you thought\n\n";
-	string identifiedMushroom = identifyMushroom();
-	cout<<"\n\nThe mushroom you have in mind is: "<<identifiedMushroom <<endl;
+	else if(startTime < 14)
+	{
+		if(endTime <= 14)
+		{
+			currentCost += (endTime - startTime) * 1000;
+			return currentCost;
+		}
+		currentCost += (14 - startTime) * 1000;
+		startTime = 14;
+		return calculateRental(startTime, endTime, currentCost);
+	}
 	
-	return 0;
+	else if(startTime < 19)
+	{
+		if(endTime <= 19)
+		{
+			currentCost += (endTime - startTime) * 1500;
+			return currentCost;
+		}
+		currentCost += (19 - startTime) * 1500;
+		startTime = 19;
+		return calculateRental(startTime, endTime, currentCost);
+	}
 	
+	else if(startTime < 21)
+	{
+		if(endTime <= 21)
+		{
+			currentCost += (endTime - startTime) * 1000;
+			return currentCost;
+		}
+		currentCost += (21 - startTime) * 1000;
+		startTime = 21;
+		return calculateRental(startTime, endTime, currentCost);
+	}
+	
+	else if(startTime < 24)
+	{
+		currentCost += (endTime - startTime) * 500;
+		return currentCost;
+	}
+	
+	else
+	{
+		return 0;
+	}
 }
-
-
-//Programmer DATCH
-
-
-
-
